@@ -1,5 +1,4 @@
 const nodemailer = require("nodemailer");
-const htmlToText = require("html-to-text");
 const ejs = require("ejs");
 const path = require("path");
 
@@ -45,7 +44,7 @@ module.exports = class Email {
         data,
       });
       emailOptions.html = html;
-      emailOptions.text = htmlToText.convert(html);
+      // emailOptions.text = htmlToText.convert(html);
       const status = await this.createTransporter().sendMail(emailOptions);
       if (status) {
         console.log("Email Sent");
