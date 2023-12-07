@@ -1,5 +1,5 @@
 const ejs = require("ejs");
-const Email = require("../Utils/Mailer");
+const Email = require("../utilities/Mailer");
 exports.sendMail = async (req, res, next) => {
   const { name, email, phone, message } = req.body;
 
