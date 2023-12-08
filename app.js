@@ -9,7 +9,7 @@ app.set("views", path.join(__dirname, "Views/EmailTemplates"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: "https://tonys-portfolio.netlify.app/",
 };
 
 app.use(cors(corsOptions));
