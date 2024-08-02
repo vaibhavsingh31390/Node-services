@@ -8,19 +8,11 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "Views/EmailTemplates"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-const allowedOrigins = ["https://tonys-portfolio.netlify.app"];
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
+  origin: "http://65.1.132.5:8002",
 };
 
 app.use(cors(corsOptions));
-
 const emailRoutes = require("./Routes/emailRoutes");
 
 app.use("/api/v1", emailRoutes);

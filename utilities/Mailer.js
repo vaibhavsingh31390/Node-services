@@ -5,9 +5,9 @@ const path = require("path");
 module.exports = class Email {
   constructor(data) {
     this.from = process.env.EMAIL_FROM;
-    this.to = process.env.EMAIL_TOME; // Sending email to yourself
+    this.to = process.env.EMAIL_TOME;
     this.name = data.name;
-    this.fromName = `Portfolio | TONY`; // Custom from name based on user's email
+    this.fromName = `Portfolio | Vaibhav`;
     this.phone = data.phone;
     this.message = data.message;
     this.templateDir = path.join(__dirname, "../Views/EmailTemplates");
@@ -44,7 +44,6 @@ module.exports = class Email {
         data,
       });
       emailOptions.html = html;
-      // emailOptions.text = htmlToText.convert(html);
       const status = await this.createTransporter().sendMail(emailOptions);
       if (status) {
         console.log("Email Sent");
