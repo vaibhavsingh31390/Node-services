@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 const ejs = require("ejs");
 const path = require("path");
+const { log } = require("console");
 
 module.exports = class Email {
   constructor(data) {
@@ -15,8 +16,15 @@ module.exports = class Email {
 
   createTransporter() {
     if (process.env.NODE_ENV === "production") {
-      //SENDGRID or any other production transporter setup
-      return 1;
+      return nodemailer.createTransport({
+        host: process.env.EMAIL_HOST,
+        port: process.env.EMAIL_PORT,
+        auth: {
+          user: process.env.EMAIL_USERNAME,
+          pass: process.env.EMAIL_PASSWORD,
+        },
+        from: this.fromName,
+      });
     } else {
       return nodemailer.createTransport({
         host: process.env.EMAIL_HOST,
@@ -50,6 +58,16 @@ module.exports = class Email {
         return true;
       }
     } catch (error) {
+      console.log({
+        host: process.env.EMAIL_HOST,
+        port: process.env.EMAIL_PORT,
+        auth: {
+          user: process.env.EMAIL_USERNAME,
+          pass: process.env.EMAIL_PASSWORD,
+        },
+        from: this.fromName,
+      });
+
       console.error("Error sending email:", error);
       return false;
     }
